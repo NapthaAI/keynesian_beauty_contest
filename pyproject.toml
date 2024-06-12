@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "template"
+version = "0.1.0"
+description = ""
+authors = ["Richard Blythman <richardblythman@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0"
+naptha-sdk = {git = "https://github.com/NapthaAI/naptha-sdk.git"}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

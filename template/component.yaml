@@ -1,0 +1,28 @@
+name: template
+type: template
+author: naptha
+version: 0.1.0
+description: Base template for new tasks and flows.
+license: MIT
+
+models:
+  default_model_provider: ollama
+  ollama: 
+    model: ollama/phi
+    max_tokens: 1000
+    temperature: 0
+    api_base: http://localhost:11434
+
+inputs:
+    system_message: "You are a helpful AI assistant."
+    save: false
+    location: node
+
+outputs:
+    filename: output.txt
+    save: false
+    location: node
+
+implementation:
+    package:
+        entrypoint: run.py
