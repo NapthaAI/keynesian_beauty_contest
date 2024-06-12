@@ -28,12 +28,30 @@ You can install the module using:
 poetry install
 ```
 
+Don't forget to change the name of the module.
+
 ## Prototyping the Module
 
 Before deploying to a Naptha node, you should iterate on improvements with the module locally. You can run the module using:
 
 ```bash
-poetry run python template/run.py
+poetry run python <module_name>/run.py
 ```
 
-When ready, push to your own HuggingFace or the Naptha org. Don't forget to change the name.
+When ready, let's push to your own HuggingFace or the Naptha org. Add a version number using:
+
+```bash
+git tag v0.1
+```
+
+You'll need to [generate an SSH key](https://huggingface.co/docs/hub/security-git-ssh) on HF and add it to your account. Then you'll be able to update your Git repository using:
+
+```bash
+git remote set-url origin git@hf.co:NapthaAI/<module_name>
+```
+
+More details in the HF [docs](https://huggingface.co/blog/password-git-deprecation#switching-to-ssh-keys)
+
+```bash
+git push --tags
+```
