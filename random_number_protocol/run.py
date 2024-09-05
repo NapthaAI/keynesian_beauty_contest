@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 import asyncio
-from concurrent import futures
-from concurrent.futures import as_completed
 import math
 from naptha_sdk.client.node import Node
 from naptha_sdk.schemas import ModuleRunInput
@@ -12,11 +10,11 @@ import time
 
 logger = get_logger(__name__)
 
-async def run_agent(agent):
-    response = await agent()
+async def run_agent(agent, name):
+    response = await agent(agent_name=name)
     return response
 
-def run(inputs, worker_nodes=None, orchestrator_node=None, flow_run=None, cfg=None):
+async def run(inputs, worker_nodes=None, orchestrator_node=None, flow_run=None, cfg=None):
     logger.info(f"Inputs: {inputs}")
 
     num_nodes = len(worker_nodes)
@@ -27,38 +25,18 @@ def run(inputs, worker_nodes=None, orchestrator_node=None, flow_run=None, cfg=No
     logger.info(f"Running {num_agents} agents...")
     tasks = []
     results = []
-    with futures.ThreadPoolExecutor(max_workers=None) as executor:
-        for i in range(num_agents):
-            node_index = min(i // agents_per_node, num_nodes - 1)
-            agent = Agent(name=f"Agent_{i}", fn="random_number_agent", worker_node=worker_nodes[node_index], orchestrator_node=orchestrator_node, flow_run=flow_run)
+    for i in range(num_agents):
+        node_index = min(i // agents_per_node, num_nodes - 1)
+        name = f"Agent_{i}"
+        agent = Agent(name=name, fn="random_number_agent", worker_node=worker_nodes[node_index], orchestrator_node=orchestrator_node, flow_run=flow_run)
+        tasks.append(run_agent(agent, name))
 
-            tasks.append(
-                executor.submit(
-                    run_agent,
-                    agent
-                ),
-            )
-        for task in as_completed(tasks):
-            results.append(task.result())
+    results = await asyncio.gather(*tasks)
 
     iet = time.time()
-    logger.info(f"[init takes {iet - ist} s]")
+    logger.info(f"[Run time: {iet - ist} s]")
 
-    # run te
-    st = time.time()
-    results2 = []
-    for p in results:
-        results2.append(p())
-    summ = 0
-    cnt = 0
-    for r in results2:
-        try:
-            summ += int(r.content["sum"])
-            cnt += int(r.content["cnt"])
-        except Exception:
-            logger.error(r.content)
-    et = time.time()
-    logger.info(f"The average value is {summ/cnt} [takes {et-st} s]")
+    logger.info(f"Results: {results}")
 
 
 if __name__ == "__main__":
@@ -69,7 +47,7 @@ if __name__ == "__main__":
         "num_agents": 2,
     }
     flow_run = {"consumer_id": "user:18837f9faec9a02744d308f935f1b05e8ff2fc355172e875c24366491625d932f36b34a4fa80bac58db635d5eddc87659c2b3fa700a1775eb4c43da6b0ec270d", 
-                "module_name": "random_number_protocol", "module_type": "flow", "worker_nodes": ["http://localhost:7001"]}
+                "module_name": "random_number_protocol", "module_type": "flow", "module_url": "https://github.com/NapthaAI/random_number_protocol", "module_version": "0.1", "worker_nodes": ["http://localhost:7001"]} 
     flow_run = ModuleRunInput(**flow_run)
     inputs = InputSchema(**inputs)
     orchestrator_node = Node("http://localhost:7001")
