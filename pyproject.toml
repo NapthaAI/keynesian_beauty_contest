@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "template"
+name = "random_number_protocol"
 version = "0.1.0"
 description = ""
 authors = ["Richard Blythman <richardblythman@gmail.com>"]

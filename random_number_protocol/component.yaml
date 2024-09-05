@@ -1,8 +1,8 @@
-name: template
-type: template
+name: random_number_protocol
+type: random_number_protocol
 author: naptha
 version: 0.1.0
-description: Base template for new tasks and flows.
+description: Multi-agent protocol for guessing random numbers.
 license: MIT
 
 models:
