@@ -38,6 +38,8 @@ async def run(inputs, worker_nodes=None, orchestrator_node=None, flow_run=None, 
 
     logger.info(f"Results: {results}")
 
+    return results 
+
 
 if __name__ == "__main__":
     cfg_path = "random_number_protocol/component.yaml"
