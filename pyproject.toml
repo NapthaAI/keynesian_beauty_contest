@@ -10,6 +10,7 @@ python = ">=3.10,<4.0"
 
 [tool.poetry.dependencies.naptha-sdk]
 git = "https://github.com/NapthaAI/naptha-sdk.git"
+branch = "chore/update-task-engine"
 
 [build-system]
 requires = ["poetry-core"]
