@@ -10,11 +10,7 @@ import time
 
 logger = get_logger(__name__)
 
-async def run_agent(agent, name):
-    response = await agent(agent_name=name)
-    return response
-
-async def run(inputs, worker_nodes=None, orchestrator_node=None, flow_run=None, cfg=None):
+async def run(inputs, worker_nodes=None, orchestrator_node=None, flow_run=None, cfg=None, task_engine=None):
     logger.info(f"Inputs: {inputs}")
 
     num_nodes = len(worker_nodes)
@@ -28,8 +24,8 @@ async def run(inputs, worker_nodes=None, orchestrator_node=None, flow_run=None, 
     for i in range(num_agents):
         node_index = min(i // agents_per_node, num_nodes - 1)
         name = f"Agent_{i}"
-        agent = Agent(name=name, fn="random_number_agent", worker_node=worker_nodes[node_index], orchestrator_node=orchestrator_node, flow_run=flow_run)
-        tasks.append(run_agent(agent, name))
+        agent = Agent(name=name, fn="random_number_agent", worker_node=worker_nodes[node_index], orchestrator_node=orchestrator_node, flow_run=flow_run, task_engine=task_engine)
+        tasks.append(agent(agent_name=name))
 
     results = await asyncio.gather(*tasks)
 
