@@ -1,8 +1,8 @@
-name: random_number_protocol
-type: random_number_protocol
+name: keynesian_beauty_contest
+type: keynesian_beauty_contest
 author: naptha
 version: 0.1.0
-description: Multi-agent protocol for guessing random numbers.
+description: Multi-agent network for Keynesian Beauty Contest.
 license: MIT
 
 models:

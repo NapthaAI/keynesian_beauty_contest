@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "random_number_protocol"
+name = "keynesian-beauty-contest"
 version = "0.1.0"
 description = ""
 authors = ["Richard Blythman <richardblythman@gmail.com>"]

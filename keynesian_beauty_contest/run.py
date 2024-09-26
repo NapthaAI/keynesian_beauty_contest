@@ -2,10 +2,10 @@
 import asyncio
 import math
 from naptha_sdk.client.node import Node
-from naptha_sdk.schemas import ModuleRunInput
+from naptha_sdk.schemas import AgentRunInput
 from naptha_sdk.task import Task as Agent
 from naptha_sdk.utils import get_logger, load_yaml
-from random_number_protocol.schemas import InputSchema
+from keynesian_beauty_contest.schemas import InputSchema
 import time
 
 logger = get_logger(__name__)
@@ -42,15 +42,15 @@ async def run(inputs, worker_nodes=None, orchestrator_node=None, flow_run=None, 
 
 
 if __name__ == "__main__":
-    cfg_path = "random_number_protocol/component.yaml"
+    cfg_path = "keynesian_beauty_contest/component.yaml"
     cfg = load_yaml(cfg_path)
 
     inputs = {
         "num_agents": 2,
     }
     flow_run = {"consumer_id": "user:18837f9faec9a02744d308f935f1b05e8ff2fc355172e875c24366491625d932f36b34a4fa80bac58db635d5eddc87659c2b3fa700a1775eb4c43da6b0ec270d", 
-                "module_name": "random_number_protocol", "module_type": "flow", "module_url": "https://github.com/NapthaAI/random_number_protocol", "module_version": "0.1", "worker_nodes": ["http://localhost:7001"]} 
-    flow_run = ModuleRunInput(**flow_run)
+                "agent_name": "random_agent", "agent_source_url": "https://github.com/NapthaAI/keynesian_beauty_contest", "agent_version": "0.1", "worker_nodes": ["http://localhost:7001"]} 
+    flow_run = AgentRunInput(**flow_run)
     inputs = InputSchema(**inputs)
     orchestrator_node = Node("http://localhost:7001")
     worker_nodes = [Node(worker_node) for worker_node in flow_run.worker_nodes]
