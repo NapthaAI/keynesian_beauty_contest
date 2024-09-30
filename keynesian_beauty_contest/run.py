@@ -7,12 +7,10 @@ import time
 
 logger = get_logger(__name__)
 
-async def run(inputs, *args, **kwargs):
+async def run(inputs, worker_node_urls, *args, **kwargs):
     logger.info(f"Inputs: {inputs}")
-    logger.info(f"Args: {args}")
-    logger.info(f"Kwargs: {kwargs}")
 
-    num_nodes = len(kwargs["worker_node_urls"])
+    num_nodes = len(worker_node_urls)
     num_agents = inputs.num_agents
     agents_per_node = math.ceil(num_agents / num_nodes)
 
@@ -23,7 +21,7 @@ async def run(inputs, *args, **kwargs):
     for i in range(num_agents):
         node_index = min(i // agents_per_node, num_nodes - 1)
         name = f"Agent_{i}"
-        agent = Agent(name=name, fn="random_number_agent", *args, **kwargs)
+        agent = Agent(name=name, fn="random_number_agent", worker_node_url=worker_node_urls[node_index], *args, **kwargs)
         tasks.append(agent(agent_name=name))
 
     results = await asyncio.gather(*tasks)
