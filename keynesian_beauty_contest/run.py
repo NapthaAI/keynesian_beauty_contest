@@ -13,7 +13,7 @@ async def run(orchestrator_run: OrchestratorRunInput, *args, **kwargs):
     logger.info(f"Inputs: {orchestrator_run.inputs}")
 
     num_nodes = len(orchestrator_run.agent_deployments)
-    num_agents = orchestrator_run.inputs.num_agents
+    num_agents = int(orchestrator_run.inputs.num_agents)
     agents_per_node = math.ceil(num_agents / num_nodes)
 
     ist = time.time()
