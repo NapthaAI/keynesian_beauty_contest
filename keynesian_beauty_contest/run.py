@@ -3,7 +3,7 @@ import asyncio
 import math
 import logging
 import time
-from naptha_sdk.task import Task as Agent
+from naptha_sdk.agent import Agent
 from naptha_sdk.schemas import OrchestratorRunInput
 
 
