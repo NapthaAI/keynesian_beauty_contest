@@ -38,4 +38,8 @@ async def run(orchestrator_run: OrchestratorRunInput, *args, **kwargs):
 
     logger.info(f"Results: {results}")
 
+    results = [result.results[0] for result in results]
+
+    logger.info(f"Final results: {results}")
+
     return results
