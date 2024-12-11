@@ -10,7 +10,7 @@ python = ">=3.10,<4.0"
 
 [tool.poetry.dependencies.naptha-sdk]
 git = "https://github.com/NapthaAI/naptha-sdk.git"
-branch = "chore/seperate_run_and_create_module"
+branch = "feat/seperate_out_create_and_run_node_methods"
 
 [build-system]
 requires = ["poetry-core"]
