@@ -6,11 +6,8 @@ authors = ["Richard Blythman <richardblythman@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.10,<4.0"
-
-[tool.poetry.dependencies.naptha-sdk]
-git = "https://github.com/NapthaAI/naptha-sdk.git"
-branch = "main"
+python = ">=3.10,<=3.13"
+naptha-sdk = {git = "https://github.com/NapthaAI/naptha-sdk.git"}
 
 [build-system]
 requires = ["poetry-core"]
