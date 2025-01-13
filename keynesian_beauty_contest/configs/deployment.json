@@ -6,6 +6,14 @@
         "config": {
             "config_name": "agent_config_1",
             "max_rounds": 10
-        }
+        },
+        "agent_deployments": [
+            {
+                "name": "agent_deployment_1"
+            },
+            {
+                "name": "agent_deployment_2"
+            }
+        ]
     }
 ]
