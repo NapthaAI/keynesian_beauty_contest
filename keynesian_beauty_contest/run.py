@@ -48,7 +48,7 @@ class KeynesianBeautyContest:
 async def run(module_run: Dict, *args, **kwargs):
     """Run the Keynesian beauty contest between multiple agents."""
     module_run = OrchestratorRunInput(**module_run)
-    module_run.inputs = InputSchema(**module_run.get("inputs", {}))
+    module_run.inputs = InputSchema(**module_run.inputs)
     beauty_contest = KeynesianBeautyContest(module_run.deployment)
     results = await beauty_contest.run_beauty_contest(module_run, *args, **kwargs)
     return results
