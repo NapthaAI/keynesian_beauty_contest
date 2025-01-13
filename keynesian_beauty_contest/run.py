@@ -2,6 +2,7 @@ import logging
 import asyncio
 import math
 import time
+import os
 from naptha_sdk.user import sign_consumer_id
 from naptha_sdk.modules.agent import Agent
 from naptha_sdk.schemas import OrchestratorRunInput, OrchestratorDeployment, AgentRunInput
