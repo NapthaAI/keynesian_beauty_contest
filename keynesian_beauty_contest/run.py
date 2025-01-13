@@ -2,8 +2,9 @@ import logging
 import asyncio
 import math
 import time
+from naptha_sdk.user import sign_consumer_id
 from naptha_sdk.modules.agent import Agent
-from naptha_sdk.schemas import OrchestratorRunInput, OrchestratorDeployment
+from naptha_sdk.schemas import OrchestratorRunInput, OrchestratorDeployment, AgentRunInput
 from keynesian_beauty_contest.schemas import InputSchema
 from typing import Dict
 
@@ -27,12 +28,18 @@ class KeynesianBeautyContest:
         for i in range(num_agents):
             node_index = min(i // agents_per_node, num_nodes - 1)
             name = f"Agent_{i}"
+
+            agent_run_input = AgentRunInput(
+                consumer_id=module_run.consumer_id,
+                inputs={"agent_name": name},
+                deployment=self.agent_deployments[node_index],
+                signature=sign_consumer_id(module_run.consumer_id, os.getenv("PRIVATE_KEY"))
+            )
+            
             agent = Agent(
                 deployment=self.agent_deployments[node_index],
-                *args,
-                **kwargs
             )
-            tasks.append(agent.call_agent_func(agent_name=name))
+            tasks.append(agent.call_agent_func(agent_run_input))
 
         results = await asyncio.gather(*tasks)
         
