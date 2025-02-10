@@ -7,7 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.10,<=3.13"
-naptha-sdk = "~=0.2.2"
+naptha-sdk = {git = "https://github.com/NapthaAI/naptha-sdk.git", rev = "4b723a84ccc8aa3b5e9bfb663190fdc1bd26dce0"}
 
 [build-system]
 requires = ["poetry-core"]
