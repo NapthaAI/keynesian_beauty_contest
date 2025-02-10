@@ -15,6 +15,10 @@ class KeynesianBeautyContest:
     """Keynesian beauty contest orchestrator implementation"""
     def __init__(self, orchestrator_deployment: OrchestratorDeployment, *args, **kwargs):
         self.orchestrator_deployment = orchestrator_deployment
+        
+        print("+++")
+        print(f"self.orchestrator_deployment: {self.orchestrator_deployment}")
+        
         self.agent_deployments = self.orchestrator_deployment.agent_deployments
         
     async def run_beauty_contest(self, module_run: OrchestratorRunInput, *args, **kwargs):
