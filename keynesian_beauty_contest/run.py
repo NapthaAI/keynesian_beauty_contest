@@ -79,6 +79,8 @@ if __name__ == "__main__":
         node_url=os.getenv("NODE_URL")
     ))
 
+    logger.info(f"deployment: {deployment}")
+
     input_params = {"num_agents": 10}  # Example input
         
     module_run = {
