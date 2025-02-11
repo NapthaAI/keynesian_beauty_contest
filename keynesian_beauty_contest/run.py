@@ -20,6 +20,8 @@ class KeynesianBeautyContest:
         logger.info(f"self.orchestrator_deployment: {self.orchestrator_deployment}")
         
         self.agent_deployments = self.orchestrator_deployment.agent_deployments
+
+        logger.info(f"self.agent_deployments: {self.agent_deployments}")
         
     async def run_beauty_contest(self, module_run: OrchestratorRunInput, *args, **kwargs):
         num_nodes = len(self.agent_deployments)
