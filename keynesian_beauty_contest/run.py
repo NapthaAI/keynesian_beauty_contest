@@ -40,7 +40,7 @@ class KeynesianBeautyContest:
                 consumer_id=module_run.consumer_id,
                 inputs={"agent_name": name},
                 deployment=self.agent_deployments[node_index],
-                signature=sign_consumer_id(module_run.consumer_id, get_private_key_from_pem(os.getenv("PRIVATE_KEY")))
+                signature=sign_consumer_id(module_run.consumer_id, get_private_key_from_pem(os.getenv("PRIVATE_KEY_FULL_PATH")))
             )
             
             agent = Agent(
