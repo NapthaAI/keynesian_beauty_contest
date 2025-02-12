@@ -43,10 +43,8 @@ class KeynesianBeautyContest:
                 signature=sign_consumer_id(module_run.consumer_id, get_private_key_from_pem(os.getenv("PRIVATE_KEY_FULL_PATH")))
             )
             
-            agent = Agent(
-                deployment=self.agent_deployments[node_index],
-            )
-            tasks.append(agent.call_agent_func(agent_run_input))
+            agent = Agent()
+            tasks.append(agent.run(agent_run_input))
 
         results = await asyncio.gather(*tasks)
         
