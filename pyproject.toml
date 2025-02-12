@@ -4,10 +4,12 @@ version = "0.1.0"
 description = ""
 authors = ["Richard Blythman <richardblythman@gmail.com>"]
 readme = "README.md"
-
+packages = [
+    {include = "keynesian_beauty_contest", from="."}
+]
 [tool.poetry.dependencies]
 python = ">=3.10,<=3.13"
-naptha-sdk = {git = "https://github.com/NapthaAI/naptha-sdk.git", rev = "4b723a84ccc8aa3b5e9bfb663190fdc1bd26dce0"}
+naptha-sdk = {git = "https://github.com/NapthaAI/naptha-sdk.git"}
 
 [build-system]
 requires = ["poetry-core"]
