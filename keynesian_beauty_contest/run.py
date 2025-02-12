@@ -3,7 +3,7 @@ import asyncio
 import math
 import time
 import os
-from naptha_sdk.user import sign_consumer_id
+from naptha_sdk.user import sign_consumer_id, get_public_key_from_pem
 from naptha_sdk.modules.agent import Agent
 from naptha_sdk.schemas import OrchestratorRunInput, OrchestratorDeployment, AgentRunInput
 from keynesian_beauty_contest.schemas import InputSchema
@@ -40,7 +40,7 @@ class KeynesianBeautyContest:
                 consumer_id=module_run.consumer_id,
                 inputs={"agent_name": name},
                 deployment=self.agent_deployments[node_index],
-                signature=sign_consumer_id(module_run.consumer_id, os.getenv("PRIVATE_KEY"))
+                signature=sign_consumer_id(module_run.consumer_id, get_public_key_from_pem(os.getenv("PRIVATE_KEY")))
             )
             
             agent = Agent(
