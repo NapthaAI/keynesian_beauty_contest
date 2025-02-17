@@ -8,5 +8,5 @@ Follow the instructions to run it on a Naptha Node from the [Naptha SDK](https:/
 Example run command:
 
 ```
-naptha run orchestrator:keynesian_beauty_contest -p "num_agents=2"
+naptha run orchestrator:keynesian_beauty_contest -p "num_agents=2" --agent_nodes "localhost,localhost"
 ```
